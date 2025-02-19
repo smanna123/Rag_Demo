@@ -1,0 +1,6 @@
+chroma_db/
+data/
+.env
+app.log
+chat.log
+.idea/

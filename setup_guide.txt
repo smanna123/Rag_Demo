@@ -1,0 +1,6 @@
+To set-up this chat bot follow below steps-
+1. First install requirements.txt file, using command pip install requirements.txt
+2. Create a .env file and store the openai api key, like [OPENAI_API_KEY="Your api key"]
+3. Inside project root directory create a folder named data, and stores all the documents inside this data folder
+4. First run the process_data script, to ingest the data.
+5. After completing the data processing, run chat_inference script

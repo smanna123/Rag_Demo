@@ -1,0 +1,4 @@
+llama-index
+python-dotenv
+qdrant-client
+llama-index-vector-stores-chroma
