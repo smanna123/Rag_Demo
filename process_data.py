@@ -3,16 +3,15 @@ from llama_index.core import (
     SimpleDirectoryReader,
     StorageContext,
     VectorStoreIndex,
-    Settings, Document
+    Settings
 )
 from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.llms.openai import OpenAI
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core.node_parser import SentenceSplitter
 import chromadb
 import os
 import logging
-from pathlib import Path
+
 
 # Configure logging
 logging.basicConfig(
@@ -42,7 +41,7 @@ CHUNK_OVERLAP = 50
 class DocumentProcessor:
     def __init__(self, db_path: str = "chroma_db", collection_name: str = "documents"):
         """Initialize document processor with ChromaDB"""
-        self.db_path = Path(db_path)
+        self.db_path = db_path
         self.collection_name = collection_name
         self.text_splitter = SentenceSplitter(
             chunk_size=CHUNK_SIZE,
@@ -53,8 +52,7 @@ class DocumentProcessor:
     def _setup_database(self):
         """Set up ChromaDB with basic error handling"""
         try:
-            self.db_path.mkdir(parents=True, exist_ok=True)
-            self.db = chromadb.PersistentClient(path=str(self.db_path))
+            self.db = chromadb.PersistentClient(self.db_path)
             self.chroma_collection = self.db.get_or_create_collection(self.collection_name)
             self.vector_store = ChromaVectorStore(chroma_collection=self.chroma_collection)
             self.storage_context = StorageContext.from_defaults(vector_store=self.vector_store)

@@ -7,7 +7,7 @@ from llama_index.core.memory import ChatMemoryBuffer
 import chromadb
 import os
 import logging
-from pathlib import Path
+
 
 # Configure logging
 logging.basicConfig(
@@ -120,7 +120,7 @@ def chat_loop():
             user_input = input("\nYou: ").strip()
 
             if user_input.lower() in ['exit']:
-                print("\nGoodbye! Have a great day!")
+                print("\nGoodbye!")
                 break
 
             if user_input.lower() == 'reset':
@@ -136,7 +136,7 @@ def chat_loop():
             print(f"\nBot: {response}")
 
         except KeyboardInterrupt:
-            print("\n\nGoodbye! Have a great day!")
+            print("\n\nGoodbye!")
             break
         except Exception as e:
             logger.error(f"Error in chat loop: {str(e)}")
