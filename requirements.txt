@@ -4,3 +4,4 @@ llama-index-vector-stores-chroma
 llama-index-llms-openai
 llama-index-embeddings-openai
 chromadb
+langchain-community
