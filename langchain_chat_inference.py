@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.llms import OpenAIChat
+from langchain_openai import ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
@@ -34,7 +34,7 @@ class ChatBot:
 
         # Initialize components
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-        self.llm = OpenAIChat(
+        self.llm = ChatOpenAI(
             model="gpt-4o-mini",
             temperature=0.2,
             streaming=True
@@ -105,7 +105,7 @@ class ChatBot:
         """Process a question and return an answer"""
         try:
             logger.info(f"Received question: {question}")
-            response = self.chain({"question": question})
+            response = self.chain.invoke(question)
             logger.info("Generated response successfully")
             return response["answer"]
         except Exception as e:
